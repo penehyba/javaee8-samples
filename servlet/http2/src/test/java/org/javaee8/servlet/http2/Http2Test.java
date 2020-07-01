@@ -69,6 +69,10 @@ public class Http2Test {
     public void testHttp2ControlGroup() throws Exception {
         Response response = testUri(new URI("https://http2.akamai.com/"));
         System.out.println("XX response:" + response);
+        response.getHeaders().keySet().forEach(key -> {
+            System.out.println(" key: " + key);
+            response.getHeaders().get(key).forEach(System.out::println);
+        });
         assertThat("myproto header", response.getHeaderString("myproto"), Matchers.equalTo("h2"));
     }
 
