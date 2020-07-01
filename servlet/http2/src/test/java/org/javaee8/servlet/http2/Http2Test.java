@@ -1,9 +1,5 @@
 package org.javaee8.servlet.http2;
 
-import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertThat;
-
 import java.io.File;
 import java.net.URI;
 import java.net.URL;
@@ -23,6 +19,10 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
 
 
 /**
@@ -68,6 +68,7 @@ public class Http2Test {
     @RunAsClient
     public void testHttp2ControlGroup() throws Exception {
         Response response = testUri(new URI("https://http2.akamai.com/"));
+        System.out.println("XX response:" + response);
         assertThat("myproto header", response.getHeaderString("myproto"), Matchers.equalTo("h2"));
     }
 
