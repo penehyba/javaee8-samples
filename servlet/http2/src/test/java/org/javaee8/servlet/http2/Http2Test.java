@@ -67,7 +67,7 @@ public class Http2Test {
     @Test(timeout = 10000L)
     @RunAsClient
     public void testHttp2ControlGroup() throws Exception {
-        Response response = testUri(new URI("https://http2.akamai.com/"));
+        Response response = testUri(new URI("https://http2.akamai.com/demo"));
         System.out.println("XX response:" + response);
         response.getHeaders().keySet().forEach(key -> {
             System.out.println(" key: " + key);
