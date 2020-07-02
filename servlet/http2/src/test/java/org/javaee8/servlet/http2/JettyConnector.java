@@ -90,7 +90,7 @@ public class JettyConnector implements Connector {
         // Create the request
         Request jettyRequest = new Request(request.getMethod(), new HttpURI(request.getUri()), HttpVersion.HTTP_2,
                 headers);
-
+        System.out.println("XX jettyRequest: " + jettyRequest);
         // Stored metadata
         int status = 200;
         StringBuilder entityStream = new StringBuilder();
