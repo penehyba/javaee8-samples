@@ -75,7 +75,7 @@ public class JettyConnector implements Connector {
             port = 443;
         }
         boolean secure = request.getUri().getScheme().equals("https");
-
+        System.out.println("XX secure: " + secure);
         // Get the session
         Session session = createSession(host, port, secure);
 
