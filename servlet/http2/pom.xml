@@ -14,7 +14,9 @@
     <name>Java EE 8 Samples: Servlet - http2</name>
 
     <properties>
-        <jetty-version>9.4.28.v20200408</jetty-version>
+<!--        <jetty-version>9.4.28.v20200408</jetty-version>-->
+        <jetty-version>9.4.31.v20200723</jetty-version>
+<!--        <jetty-version>11.0.0.beta1</jetty-version>-->
     </properties>
 
     <dependencies>
@@ -544,6 +546,15 @@
                 <surefireArgLine/>
             </properties>
         </profile>
+<!--        <profile> TODO PN-->
+<!--            <id>alpn-when-ibm</id>-->
+<!--            <activation>-->
+<!--                <jdk>1.8.0_282</jdk>-->
+<!--            </activation>-->
+<!--            <properties>-->
+<!--                <alpn.version>8.0.5.15</alpn.version>-->
+<!--            </properties>-->
+<!--        </profile>-->
 
     </profiles>
 

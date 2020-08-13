@@ -1,7 +1,5 @@
 package org.javaee8.servlet.http2;
 
-import static java.nio.charset.StandardCharsets.UTF_8;
-
 import java.io.IOException;
 
 import javax.servlet.ServletException;
@@ -12,6 +10,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.PushBuilder;
 import javax.ws.rs.core.MediaType;
 
+import static java.nio.charset.StandardCharsets.UTF_8;
+
 @WebServlet("/test")
 public class Servlet extends HttpServlet {
 
@@ -20,6 +20,7 @@ public class Servlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
+        System.out.println("XX in Servlet doGet()");
         response.setContentType(MediaType.TEXT_HTML_TYPE.withCharset(UTF_8.name()).toString());
         response.setStatus(200);
 

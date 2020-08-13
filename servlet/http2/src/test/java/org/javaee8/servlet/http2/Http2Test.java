@@ -1,10 +1,9 @@
 package org.javaee8.servlet.http2;
 
-import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
-import static org.junit.Assert.assertEquals;
-
 import java.io.File;
 import java.net.URL;
+import java.util.Arrays;
+import java.util.List;
 
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.ContentResponse;
@@ -21,6 +20,9 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+
+import static org.jboss.shrinkwrap.api.ShrinkWrap.create;
+import static org.junit.Assert.assertEquals;
 
 
 /**
@@ -48,6 +50,12 @@ public class Http2Test {
     public void setup() throws Exception {
         HttpClientTransportOverHTTP2 http2Transport = new HttpClientTransportOverHTTP2(new HTTP2Client());
         SslContextFactory.Client sslContextFactory = new SslContextFactory.Client();
+        final String[] excludeCipherSuites = sslContextFactory.getExcludeCipherSuites();
+        System.out.println("XX default excludedCipherSuite: " + Arrays.toString(excludeCipherSuites));
+//        final List<String> newExcludeCS = Arrays.stream(excludeCipherSuites).filter(s -> !s.equals("^SSL_.*$")).collect(Collectors.toList());
+        final List<String> newExcludeCS = Arrays.asList("NOTHING", "HERE");
+        System.out.println("XX newExcludeCS: " + newExcludeCS);
+        sslContextFactory.setExcludeCipherSuites(Arrays.toString(newExcludeCS.toArray()));
         client = new HttpClient(http2Transport, sslContextFactory);
         client.start();
     }
@@ -65,8 +73,19 @@ public class Http2Test {
      */
     @Test(timeout = 10000L)
     @RunAsClient
+//    @Ignore
     public void testHttp2ControlGroup() throws Exception {
         ContentResponse response = client.GET("https://http2.akamai.com/demo");
+        System.out.println("RESPONSE=" + response);
+        assertEquals("HTTP/2 should be used", HttpVersion.HTTP_2, response.getVersion());
+    }
+
+    //    https://www.cloudflare.com/
+    @Test(timeout = 10000L)
+    @RunAsClient
+    public void testHttp2ControlGroup2() throws Exception {
+        ContentResponse response = client.GET("https://www.cloudflare.com/");
+        System.out.println("RESPONSE=" + response);
         assertEquals("HTTP/2 should be used", HttpVersion.HTTP_2, response.getVersion());
     }
 
@@ -78,6 +97,7 @@ public class Http2Test {
     @Test(timeout = 10000L)
     @RunAsClient
     public void testServerHttp2() throws Exception {
+        System.out.println("Running testServerHttp2()");
         ContentResponse response = client.GET(url.toURI());
         // the header 'protocol' is set in the Servlet class.
         assertEquals(
