@@ -56,6 +56,8 @@ public class Http2Test {
         final List<String> newExcludeCS = Arrays.asList("NOTHING", "HERE");
         System.out.println("XX newExcludeCS: " + newExcludeCS);
         sslContextFactory.setExcludeCipherSuites(Arrays.toString(newExcludeCS.toArray()));
+        System.out.println("XX selectedCipherSuites: " + Arrays.toString(sslContextFactory.getSelectedCipherSuites()));
+        System.out.println("XX selectedProtocols: " + Arrays.toString(sslContextFactory.getSelectedProtocols()));
         client = new HttpClient(http2Transport, sslContextFactory);
         client.start();
     }
