@@ -2,8 +2,6 @@ package org.javaee8.servlet.http2;
 
 import java.io.File;
 import java.net.URL;
-import java.util.Arrays;
-import java.util.List;
 
 import org.eclipse.jetty.client.HttpClient;
 import org.eclipse.jetty.client.api.ContentResponse;
@@ -50,14 +48,14 @@ public class Http2Test {
     public void setup() throws Exception {
         HttpClientTransportOverHTTP2 http2Transport = new HttpClientTransportOverHTTP2(new HTTP2Client());
         SslContextFactory.Client sslContextFactory = new SslContextFactory.Client();
-        final String[] excludeCipherSuites = sslContextFactory.getExcludeCipherSuites();
-        System.out.println("XX default excludedCipherSuite: " + Arrays.toString(excludeCipherSuites));
-//        final List<String> newExcludeCS = Arrays.stream(excludeCipherSuites).filter(s -> !s.equals("^SSL_.*$")).collect(Collectors.toList());
-        final List<String> newExcludeCS = Arrays.asList("NOTHING", "HERE");
-        System.out.println("XX newExcludeCS: " + newExcludeCS);
-        sslContextFactory.setExcludeCipherSuites(Arrays.toString(newExcludeCS.toArray()));
-//        System.out.println("XX selectedCipherSuites: " + Arrays.toString(sslContextFactory.getSelectedCipherSuites()));
-//        System.out.println("XX selectedProtocols: " + Arrays.toString(sslContextFactory.getSelectedProtocols()));
+//        final String[] excludeCipherSuites = sslContextFactory.getExcludeCipherSuites();
+//        System.out.println("XX default excludedCipherSuite: " + Arrays.toString(excludeCipherSuites));
+////        final List<String> newExcludeCS = Arrays.stream(excludeCipherSuites).filter(s -> !s.equals("^SSL_.*$")).collect(Collectors.toList());
+//        final List<String> newExcludeCS = Arrays.asList("NOTHING", "HERE");
+//        System.out.println("XX newExcludeCS: " + newExcludeCS);
+//        sslContextFactory.setExcludeCipherSuites(Arrays.toString(newExcludeCS.toArray()));
+////        System.out.println("XX selectedCipherSuites: " + Arrays.toString(sslContextFactory.getSelectedCipherSuites()));
+////        System.out.println("XX selectedProtocols: " + Arrays.toString(sslContextFactory.getSelectedProtocols()));
         client = new HttpClient(http2Transport, sslContextFactory);
         client.start();
     }
