@@ -76,9 +76,10 @@ public class Http2Test {
 //    @Ignore
     public void testHttp2ControlGroup() throws Exception {
         System.out.println("java.version: " + System.getProperty("java.version")
-                                   + "\n" + System.getProperty("environment")
-                                   + "\n" + System.getProperty("mvn.version")
-                                   + "\n" + System.getProperty("maven.version"));
+                                   + "\n" + System.getProperty("java.home")
+                                   + "\n" + System.getProperty("java.vendor")
+                                   + "\n" + System.getProperty("java.vendor.url")
+                                   + "\n" + System.getProperty("os.version"));
         ContentResponse response = client.GET("https://http2.akamai.com/demo");
         System.out.println("RESPONSE=" + response);
         assertEquals("HTTP/2 should be used", HttpVersion.HTTP_2, response.getVersion());
